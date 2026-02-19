@@ -2,7 +2,7 @@
 
 A modern, premium landing page for **Peroxia Technology**, built with Next.js 16, Tailwind CSS v4, Framer Motion, GSAP, and Lucide React.
 
-🔗 **Live Demo**: [Deploy to Vercel](https://peroxia.vercel.app/)
+🔗 **Live Demo**: [Peroxia](https://peroxia.vercel.app/)
 
 ---
 
