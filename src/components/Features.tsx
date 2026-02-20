@@ -58,7 +58,7 @@ const itemVariants = {
 
 export default function Features() {
   return (
-    <section id="features" className="section-padding relative overflow-hidden">
+    <section id="features" className="section-padding relative overflow-hidden section-alt">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-surface/30 to-background pointer-events-none" />
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/3 blur-3xl pointer-events-none" />
@@ -75,8 +75,7 @@ export default function Features() {
             Why Peroxia
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-6">
-            Built Different,{" "}
-            <span className="gradient-text">Built Better</span>
+            Built Different, Built Better
           </h2>
           <p className="text-muted max-w-2xl mx-auto text-lg leading-relaxed">
             We combine technical depth with genuine care for your success. Here&#39;s what

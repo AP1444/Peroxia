@@ -120,8 +120,7 @@ export default function CTA() {
             Get in Touch
           </span>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mt-3 mb-6 leading-tight">
-            Let&apos;s Build Something{" "}
-            <span className="gradient-text">Extraordinary</span>
+            Let&apos;s Build Something Extraordinary
           </h2>
           <p className="text-muted text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
             Have a project in mind? Fill out the form and we&apos;ll get back to

@@ -1,9 +1,55 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { Target, Users, Lightbulb } from "lucide-react";
 import gsap from "gsap";
+
+function TiltCard({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+
+    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      className={className}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transformStyle: "preserve-3d",
+        transition: "transform 0.15s ease-out",
+        willChange: "transform",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 const stats = [
   { label: "Projects Delivered", value: 150, suffix: "+" },
@@ -78,7 +124,7 @@ const itemVariants = {
 
 export default function About() {
   return (
-    <section id="about" className="section-padding relative overflow-hidden">
+    <section id="about" className="section-padding relative overflow-hidden section-alt">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-surface/30 to-background pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -93,8 +139,7 @@ export default function About() {
             Who We Are
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-6">
-            Building the Future of{" "}
-            <span className="gradient-text">Technology</span>
+            Building the Future of Technology
           </h2>
           <p className="text-muted max-w-2xl mx-auto text-lg leading-relaxed">
             Founded with the belief that technology should empower — not overwhelm — Peroxia
@@ -111,16 +156,14 @@ export default function About() {
           className="grid md:grid-cols-3 gap-8 mb-16"
         >
           {pillars.map((p) => (
-            <motion.div
-              key={p.title}
-              variants={itemVariants}
-              className="gradient-border p-8 rounded-2xl hover:bg-surface-light/50 transition-colors duration-300 group"
-            >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-300">
-                <p.icon size={22} className="text-primary" />
-              </div>
-              <h3 className="text-lg font-semibold mb-3">{p.title}</h3>
-              <p className="text-muted text-sm leading-relaxed">{p.text}</p>
+            <motion.div key={p.title} variants={itemVariants}>
+              <TiltCard className="gradient-border p-8 rounded-2xl hover:bg-surface-light/50 transition-colors duration-300 group cursor-default">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-300">
+                  <p.icon size={22} className="text-primary" />
+                </div>
+                <h3 className="text-lg font-semibold mb-3">{p.title}</h3>
+                <p className="text-muted text-sm leading-relaxed">{p.text}</p>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

@@ -91,11 +91,7 @@ export default function Hero() {
                 marginRight: "0.3em",
               }}
             >
-              {word === "Intelligent" || word === "Software" ? (
-                <span className="gradient-text">{word}</span>
-              ) : (
-                word
-              )}
+              {word}
             </span>
           ))}
         </h1>

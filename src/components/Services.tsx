@@ -115,7 +115,7 @@ export default function Services() {
             What We Do
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-6">
-            Solutions That <span className="gradient-text">Scale</span>
+            Solutions That Scale
           </h2>
           <p className="text-muted max-w-2xl mx-auto text-lg leading-relaxed">
             We deliver end-to-end technology solutions tailored to your business
