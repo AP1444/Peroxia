@@ -1,100 +1,129 @@
 # Peroxia Technology — Landing Page
 
-A modern, premium landing page for **Peroxia Technology**, built with Next.js 16, Tailwind CSS v4, Framer Motion, GSAP, and Lucide React.
-
-🔗 **Live Demo**: [Deploy to Vercel](https://vercel.com/new)
+A modern, premium landing page for **Peroxia Technology**, built with Next.js, Tailwind CSS v4, Framer Motion, GSAP, and Nodemailer.
 
 ---
 
-## Approach & Design Decisions
+## ✨ Features
 
-### Design Philosophy
-- **Dark premium aesthetic** with a deep navy background (`#030712`), electric blue primary (`#3b82f6`), and cyan accent (`#06b6d4`)
-- **Strong typography hierarchy** using Inter (Google Font) with weights 300-900
-- **Glassmorphism** on the navbar with backdrop blur — creates depth without clutter
-- **Gradient border cards** using CSS mask technique for a subtle glow effect
-- Custom CSS design tokens via Tailwind v4's `@theme` system for consistency
+- **Cinematic Preloader** — "Peroxia" text fills with blue gradient from bottom to top on a light background, then slides up to reveal the dark site
+- **Smart Navbar** — Hides on scroll down, reappears on scroll up from anywhere on the page
+- **Hero Section** — GSAP-powered word reveal animation with a 3D rotateX entrance
+- **About Section** — Mission/Vision layout with animated stat counters (150+ projects, 50+ clients, etc.)
+- **Services (Stacking Cards)** — 6 sticky-stacking service cards with gradient accents, tech tags, and stat highlights
+- **Features Grid** — "Why Choose Us" section with hover-interactive cards
+- **Testimonials Marquee** — Dual-row infinite scrolling testimonial cards
+- **Contact Form** — Fully functional form with Nodemailer email delivery
+- **Responsive Design** — Fully responsive across all screen sizes
 
-### Architecture
+---
+
+## 🏗️ Architecture
+
 ```
 src/
 ├── app/
-│   ├── layout.tsx        # Root layout, SEO metadata, font setup
-│   ├── page.tsx          # Page composition (server component)
-│   └── globals.css       # Design system tokens & utilities
+│   ├── api/contact/
+│   │   └── route.ts       # Nodemailer API endpoint
+│   ├── layout.tsx          # Root layout, SEO metadata, fonts
+│   ├── page.tsx            # Page composition (client component)
+│   └── globals.css         # Design tokens & utilities
 └── components/
-    ├── Navbar.tsx         # Fixed navbar with scroll morph
-    ├── Hero.tsx           # GSAP word-reveal hero
-    ├── About.tsx          # Mission/Vision + GSAP counter
-    ├── Services.tsx       # 6 service cards grid
-    ├── Features.tsx       # Why Choose Us section
-    ├── Testimonials.tsx   # Social proof cards
-    ├── CTA.tsx            # Parallax CTA section
-    └── Footer.tsx         # Multi-column footer
+    ├── Preloader.tsx        # Cinematic loading animation
+    ├── Navbar.tsx           # Smart hide/show navbar
+    ├── Hero.tsx             # GSAP word-reveal hero
+    ├── About.tsx            # Mission/Vision + counters
+    ├── Services.tsx         # Sticky stacking service cards
+    ├── Features.tsx         # Why Choose Us grid
+    ├── Testimonials.tsx     # Marquee testimonial cards
+    ├── CTA.tsx              # Contact form section
+    └── Footer.tsx           # Multi-column footer
 ```
 
-Each section is an isolated client component with co-located data. Page composition happens in a server component (`page.tsx`) for optimal performance.
+---
+
+## 🎨 Design System
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| Background | `#030712` | Page background |
+| Surface | `#111827` | Card backgrounds |
+| Primary | `#3b82f6` | Buttons, links, accents |
+| Accent | `#06b6d4` | Gradients, highlights |
+| Font | Inter (300–900) | All typography |
 
 ---
 
-## Animation Decisions
+## 🛠️ Tech Stack
 
-| Animation | Library | Rationale |
-|-----------|---------|-----------|
-| **Hero word reveal** | GSAP | Split-text with `rotateX` 3D entrance — GSAP's timeline sequencing is perfect for staggered orchestration |
-| **Stats counter** | GSAP | Smooth number interpolation with `onUpdate` — GSAP handles decimal tween values natively |
-| **Parallax CTA background** | GSAP ScrollTrigger | ScrollTrigger provides scrub-linked parallax that stays buttery at 60fps |
-| **Scroll reveal sections** | Framer Motion `whileInView` | Declarative and clean — each section fades + slides up when scrolled into view |
-| **Staggered cards** | Framer Motion variants | Parent `staggerChildren` + child `variants` pattern keeps code minimal |
-| **Hover micro-interactions** | Framer Motion `whileHover` | Scale, lift, and glow on cards/buttons — feels responsive without being distracting |
-| **Navbar scroll morph** | CSS + Framer Motion | Background blur + padding shrink on scroll — lightweight and smooth |
-
-**Philosophy**: Every animation serves a purpose (guide attention, provide feedback, enhance hierarchy). No gratuitous motion.
+| Technology | Purpose |
+|------------|---------|
+| **Next.js** (App Router) | Framework, API routes, SSR |
+| **Tailwind CSS v4** | Utility-first styling with `@theme` |
+| **Framer Motion** | Declarative React animations |
+| **GSAP + ScrollTrigger** | Timeline & scroll-linked animations |
+| **Nodemailer** | Contact form email delivery |
+| **Lucide React** | Icon library |
+| **TypeScript** | Type safety |
 
 ---
 
-## Tech Choices
+## 🚀 Getting Started
 
-| Technology | Version | Why |
-|------------|---------|-----|
-| Next.js | 16 (App Router) | Static export, server components, optimal image handling |
-| Tailwind CSS | v4 | New `@theme` system, zero-config, utility-first |
-| Framer Motion | 12 | Best React animation library — declarative, performant |
-| GSAP | 3.14 | Industry-standard for complex timeline & scroll animations |
-| Lucide React | Latest | Lightweight, consistent icon set — drop-in with React |
-| TypeScript | 5 | Type safety across components and props |
-
----
-
-## Tradeoffs & Improvements
-
-With more time, I would add:
-- **Page transition animation** with Framer Motion `AnimatePresence` on route changes
-- **Loading screen** with a branded skeleton shimmer
-- **Blog/Case Study section** with MDX content
-- **Contact form** with server action + validation
-- **Intersection Observer** for more granular scroll-triggered animations
-- **Image optimization** with `next/image` for real photography assets
-- **i18n support** for multi-language targeting
-- **Core Web Vitals** audit with Lighthouse CI
-
----
-
-## Getting Started
+### 1. Install dependencies
 
 ```bash
 npm install
-npm run dev      # → http://localhost:3000
-npm run build    # Production build
-npm run start    # Serve production build
 ```
 
-## Deploy
+### 2. Configure environment variables
+
+Copy the example env file and fill in your SMTP credentials:
 
 ```bash
-npx vercel
+cp .env.local.example .env.local
 ```
+
+```env
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-gmail-app-password
+CONTACT_EMAIL=your-email@gmail.com
+```
+
+> **Gmail users**: Generate an App Password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2FA).
+
+### 3. Run the dev server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-Built with ❤️ for Peroxia Technology Frontend Engineering Evaluation.
+## 📦 Deploy to Vercel
+
+1. Push your code to GitHub
+2. Go to [vercel.com/new](https://vercel.com/new) and import your repo
+3. Add the environment variables (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `CONTACT_EMAIL`)
+4. Click **Deploy**
+
+Every push to `main` will auto-deploy.
+
+---
+
+## 📂 Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Serve production build |
+| `npm run lint` | Run ESLint |
+
+---
+
+Built with ❤️ by Peroxia Technology.
