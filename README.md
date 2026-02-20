@@ -2,6 +2,7 @@
 
 A modern, premium landing page for **Peroxia Technology**, built with Next.js, Tailwind CSS v4, Framer Motion, GSAP, and Nodemailer.
 
+Demo - [Peroxia](https://peroxia.vercel.app/)
 ---
 
 ## ✨ Features
